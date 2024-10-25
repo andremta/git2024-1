@@ -1,0 +1,6 @@
+deploy:
+  script:
+    -docker loging -u andremta -p $pass
+    -docker build -t andremta/webcounter:latest .
+    -docker push andremta/webcounter:latest
+    -docker stack deploy -c docker-compose.yml app
