@@ -1,0 +1,5 @@
+# Python modules to run
+flask
+redis
+waitress
+

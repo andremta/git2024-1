@@ -1,0 +1,26 @@
+version: "3"
+
+volumes:
+  redis-data:
+
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data 
+
+  webcounter:
+    image: "cfreire70/webcounter:latest"
+    ports:
+      - 80:5000
+    environment:
+      - REDIS_URL=redis
+    depends_on:
+      - redis  
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
